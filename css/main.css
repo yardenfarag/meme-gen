@@ -32,8 +32,9 @@ html {
 
 body {
     margin: 0;
-    font-size: 1rem;
+    font-size: 1em;
     background-color: var(--clr2);
+    max-width: 1400px;
 }
 
 img {
@@ -44,6 +45,10 @@ a {
     text-decoration: none;
     text-align: center;
     color: var(--clr5);
+}
+
+a:hover {
+    color: var(--clr6);
 }
 
 
@@ -106,18 +111,19 @@ a {
 
 header {
     background-color: var(--clr1);
-    height: 200px;
+    height: 55px;
     font-size: 1em;
+    border: 1px solid var(--clr3);
+    margin-block-end: 20px;
 }
 
 .header-content {
-    padding: 50px 50px;
-    border: 1px solid var(--clr3);
+    padding: 10px 10px;
 }
 
 .main-header .logo img {
-    height: 64px;
-    width: 300px;
+    height: 45px;
+    width: 200px;
     left: 20px;
     top: 9px;
     border-radius: 0px;
@@ -125,17 +131,13 @@ header {
 }
 
 .header-content {
-    height: 200px;
-    font-size: 2.5em;
+    height: 50px;
+    font-size: 1em;
 }
 
 .main-nav ul {
     display: flex;
     gap: 100px
-}
-
-.main-nav a:hover {
-    color: var(--clr6);
 }
 
 /* MAIN CONTENT */
@@ -152,12 +154,12 @@ header {
 
 .search {
     width: 100%;
-    height: 50px;
+    height: 40px;
     border-radius: 2rem;
     border: 1px solid var(--clr5);
     color: var(--clr5);
     padding-inline-start: 20px;
-    font-size: 1.6rem ;
+    font-size: 1rem ;
     font-style: italic;
 }
 
@@ -172,17 +174,23 @@ header {
 .images img {
     border-radius: 10px;
     cursor: pointer;
+    width: 200px;
+    height: 200px;
 }
 
 /* canvas */
 
 .canvas-container {
-    width: 70%;
-    height: 900px;
-    background-color: var(--clr1);
+    width: 75%;
+    height: auto;
+    background-color: transparent;
+    gap: 40px;
+    border-inline-end: 1px solid var(--clr3)
 }
 
 canvas {
+    align-self: center;
+    justify-self: center;
     background-color: var(--clr1);
     border: 1px solid var(--clr5);
     border-radius: 10px;
@@ -191,11 +199,8 @@ canvas {
 /* editor */
 
 .editor {
-    width: 100%;
-}
-
-.editor .editor-header {
-    width: 100%;
+    gap: 20px;
+    border: 1px solid var(--clr3);
 }
 
 .editor .text-editor {
@@ -211,7 +216,7 @@ canvas {
     height: 50px;
     border:none;
     background-color: transparent;
-    font-size: 2rem;
+    font-size: 1rem;
     cursor: pointer;
 }
 
