@@ -30,6 +30,7 @@
             id="my-canvas" 
             height="500" 
             width="500" 
+            onclick="canvasClicked(event)"
             ></canvas>
         </div>
         <div class="text-editor flex align-center direction-col">
@@ -58,7 +59,7 @@
                     <button class="editor-btn">^</button>
                     <button class="editor-btn">/</button>
                 </div>
-                <textarea name="text-line" id="" cols="30" rows="3"></textarea>
+                <textarea name="text-line" id="" cols="30" rows="3" oninput="onImgText(this.value)"></textarea>
             </div>
 
             <div class="stickers">

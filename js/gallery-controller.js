@@ -97,8 +97,13 @@ function renderGallery() {
     const elImages = document.querySelector('.images')
 
     const strHTMLs = gImgs.map(img => {
-        return `<img src="img/${img.id}.jpg" alt="" onclick="uploadImgToCanvas(${img.id})">`
+        return `<img src="img/${img.id}.jpg" alt="" onclick="onImgSelect(${img.id})">`
     }).join('')
 
     elImages.innerHTML = strHTMLs
+}
+
+function onImgSelect(imgId) {
+    setImg(imgId)
+    renderMeme()
 }
