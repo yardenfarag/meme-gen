@@ -23,6 +23,11 @@ function renderMeme() {
 	img.onload = () => {
         renderImg(img)
         meme.lines.forEach(line => {
+            gCtx.lineWidth = 2
+            gCtx.strokeStyle = 'black'
+            gCtx.fillStyle = line.color
+            gCtx.font = line.size + 'px ' + line.font
+            gCtx.textAlign = 'center'
             drawText(line.text, line.pos.x, line.pos.y)
 
         })
@@ -44,11 +49,7 @@ function renderImg(img) {
 
   function drawText(text, x, y) {
 
-    gCtx.lineWidth = 2
-    gCtx.strokeStyle = 'black'
-    gCtx.fillStyle = 'white'
-    gCtx.font = '40px impact'
-    gCtx.textAlign = 'center'
+    
     gCtx.fillText(text, x, y) // Draws (fills) a given text at the given (x, y) position.
     gCtx.strokeText(text, x, y) // Draws (strokes) a given text at the given (x, y) position.
   }
@@ -74,3 +75,30 @@ function renderImg(img) {
     }
     console.log(clickedLine)
   }
+
+ function onChangeTextColor(color) {
+    setTextColor(gLineIdx ,color)
+    renderMeme()
+ }
+
+ function onLowerFontSize() {
+    lowerFontSize(gLineIdx)
+    renderMeme()
+ }
+
+ function onRaiseFontSize() {
+    raiseFontSize(gLineIdx)
+    renderMeme()
+ }
+
+ function onSwitchTextLines() {
+    const meme = getMeme()
+    gLineIdx += 1
+
+    if (gLineIdx >= meme.lines.length) gLineIdx = 0
+
+
+    const elTextInput = document.querySelector('[name=text-line]')
+    elTextInput.value =  meme.lines[gLineIdx].text
+
+ }
