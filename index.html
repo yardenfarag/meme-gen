@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Meme Generator</title>
+</head>
+<body class="main-layout">
+    
+    <header class="main-header main-layout">
+        <div class="header-content flex align-center space-between">
+            <div class="logo"><img src="img/logo.png" alt=""></div>
+            <nav class="main-nav">
+                <ul class="menu clean-list">
+                    <li><a onclick="onActive(this)" href="#">Memes</a></li>
+                    <li><a onclick="onActive(this)" href="#">Gallery</a></li>
+                    <li><a onclick="onActive(this)" href="#">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    
+    <main class="editor flex justify-center">
+        <div class="canvas-container flex align-center justify-center">
+            <canvas 
+            id="my-canvas" 
+            height="800" 
+            width="800" 
+            ></canvas>
+        </div>
+        <div class="text-editor">
+            <div class="editor-header">
+                <h1>Edit Text Lines</h1>
+                <nav class="edito-nav">
+                    <ul class="clean-list">
+                        <li><a href="#">//</a></li>
+                        <li><a href="#">+</a></li>
+                        <li><a href="#">🗑️</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="text">
+                <div class="tools">
+                    <select name="fonts" id="">
+                        <option value="Impact"></option>
+                        <option value="Arial"></option>
+                    </select>
+                    <button class="editor-btn">A-</button>
+                    <button class="editor-btn">A+</button>
+                    |
+                    <button class="editor-btn">=</button>
+                    <button class="editor-btn">=</button>
+                    <button class="editor-btn">=</button>
+                    |
+                    <button class="editor-btn">^</button>
+                    <button class="editor-btn">/</button>
+                </div>
+                <textarea name="text-line" id="" cols="30" rows="10"></textarea>
+            </div>
+
+            <div class="stickers">
+                🤖🤔😉😎🤗🤩😶😑😐🙂☺️🙄😥😫😶‍🌫️😛🤤😓😦😢😬
+            </div>
+
+        </div>
+    </main>
+
+    <main class="main-content main-layout">
+        <input class="search" type="text" placeholder="Search">
+        <div class="images flex wrap align-center">
+            <img src="img/1.jpg" alt="">
+            <img src="img/2.jpg" alt="">
+            <img src="img/3.jpg" alt="">
+            <img src="img/4.jpg" alt="">
+            <img src="img/5.jpg" alt="">
+            <img src="img/6.jpg" alt="">
+            <img src="img/7.jpg" alt="">
+            <img src="img/8.jpg" alt="">
+            <img src="img/9.jpg" alt="">
+            <img src="img/10.jpg" alt="">
+            <img src="img/11.jpg" alt="">
+            <img src="img/12.jpg" alt="">
+            <img src="img/13.jpg" alt="">
+            <img src="img/14.jpg" alt="">
+            <img src="img/15.jpg" alt="">
+            <img src="img/16.jpg" alt="">
+            <img src="img/17.jpg" alt="">
+            <img src="img/18.jpg" alt="">
+        </div>
+    </main>
+
+
+</body>
+</html>
