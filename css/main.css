@@ -35,11 +35,15 @@ body {
     margin: 0;
     font-size: 1em;
     background-color: var(--clr2);
-    max-width: 1400px;
+
 }
 
 img {
     max-width: 100%;
+}
+
+img:hover {
+    opacity: 0.6;
 }
 
 a {
@@ -106,8 +110,7 @@ h3 {
 /* LAYOUT */
 
 .main-layout {
-    margin-left: 100px;
-    margin-right: 100px;
+    margin:0
 }
 
 /* COMPONENTS */
@@ -141,7 +144,7 @@ header {
 
 .main-nav ul {
     display: flex;
-    gap: 100px
+    gap: 70px
 }
 
 /* MAIN CONTENT */
@@ -173,11 +176,11 @@ header {
 .images {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, 170px);
     padding-block-start: 30px;
     justify-items: center;
     align-items: center;
-    gap: 20px;
+    gap: 40px;
 }
 
 .images img {
@@ -190,7 +193,6 @@ header {
 /* canvas */
 
 .canvas-container {
-    width: 900px;
     height: auto;
     background-color: transparent;
     gap: 40px;
@@ -209,7 +211,7 @@ canvas {
 
 .editor {
     display: none;
-    height: 80vh;
+    height: 90vh;
     gap: 20px;
     border: 1px solid var(--clr3);
     overflow: hidden;
@@ -221,10 +223,8 @@ canvas {
 
 .editor .editor-header {
     width: 100%;
-}
-
-.editor .editor-header h3 {
-    align-self: flex-start;
+    flex-direction: column;
+    align-items: center; 
 }
 
 .editor .editor-header ul {
@@ -260,7 +260,7 @@ canvas {
     align-self: flex-start;
     justify-self:start;
     padding: 10px;
-    padding-block-end: 50px;
+    padding-block-start: 40px;
 }
 
 .editor-btn {
@@ -282,4 +282,48 @@ canvas {
     border: 1px solid var(--clr3);
     margin-block-start: 10px;
     background-color: var(--clr1);
+}
+
+/* FOR MOBILE */
+
+@media (max-width: 820px) {
+    .editor {
+        flex-direction: column;
+    }
+    .editor .text-editor {
+        align-self: center;
+    }
+}
+
+/* RESPONSIVNESS */
+
+@media (min-width: 820px) {
+    .main-layout {
+        margin-inline-start: 10px;
+        margin-inline-end: 10px;
+     }
+     .canvas-container {
+        width: 900px;
+        gap: 40px;
+    }
+    .editor a{
+        padding-block-end: 50px;
+    }
+
+    .editor .editor-header {
+        width: 100%;
+    }
+    
+    .editor .editor-header h3 {
+        align-self: flex-start;
+    }
+
+}
+
+@media (min-width: 1200px) {
+    .main-layout {
+       margin-inline-start: 50px;
+       margin-inline-end: 50px;
+    }
+
 }

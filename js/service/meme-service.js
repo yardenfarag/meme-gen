@@ -2,39 +2,7 @@
 
 
 let gIdxLine = 2
-let gMeme = {
-	currImgId: 1,
-	lines: [
-        {
-            idx: 0,
-            text: 'TOP',
-            pos: 
-            {
-                x: 250,
-                y: 50
-            },
-            color: '#fff',
-            shadowColor: '#000000',
-            size: 40,
-            font: 'impact',
-            direction: 'center'
-        },
-        {
-            idx: 1,
-            text: 'BOTTOM',
-            pos: 
-            {
-                x: 250,
-                y: 450
-            },
-            color: '#fff',
-            shadowColor: '#000000',
-            size: 40,
-            font: 'impact',
-            direction: 'center'
-        }
-    ]
-}
+let gMeme
 
 
 function getMeme() {
@@ -65,6 +33,8 @@ function changeFontSize(lineIdx, sign) {
 }
 
 function _createMeme() {
+    const canvas = getCanvas()
+
     return gMeme = {
         currImgId: 1,
         lines: [
@@ -73,8 +43,8 @@ function _createMeme() {
                 text: 'TOP',
                 pos: 
                 {
-                    x: 250,
-                    y: 50
+                    x: canvas.width/2,
+                    y: canvas.height + 50 - canvas.height
                 },
                 color: '#fff',
                 shadowColor: '#000000',
@@ -87,8 +57,8 @@ function _createMeme() {
                 text: 'BOTTOM',
                 pos: 
                 {
-                    x: 250,
-                    y: 450
+                    x: canvas.width/2,
+                    y: canvas.height - 25
                 },
                 color: '#fff',
                 shadowColor: '#000000',
