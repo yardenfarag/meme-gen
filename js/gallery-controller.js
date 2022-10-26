@@ -94,6 +94,9 @@ let gImgs = [
 ]
 
 function renderGallery() {
+    hideEditor()
+    showGallery()
+
     const elImages = document.querySelector('.images')
 
     const strHTMLs = gImgs.map(img => {
@@ -103,7 +106,23 @@ function renderGallery() {
     elImages.innerHTML = strHTMLs
 }
 
+function showGallery() {
+    const elGallery = document.querySelector('.main-content')
+    elGallery.style.display = 'block'
+}
+
+function hideGallery() {
+    const elGallery = document.querySelector('.main-content')
+    elGallery.style.display = 'none'
+}
+
+function hideEditor() {
+    const elEditor = document.querySelector('.editor')
+    elEditor.style.display = 'none'
+}
+
 function onImgSelect(imgId) {
+    
     setImg(imgId)
     renderMeme()
 }

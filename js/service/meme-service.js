@@ -1,6 +1,8 @@
 'use strict'
 
-var gMeme = {
+
+let gIdxLine = 2
+let gMeme = {
 	currImgId: 1,
 	lines: [
         {
@@ -12,8 +14,10 @@ var gMeme = {
                 y: 50
             },
             color: '#fff',
+            shadowColor: '#000000',
             size: 40,
-            font: 'impact'
+            font: 'impact',
+            direction: 'center'
         },
         {
             idx: 1,
@@ -24,8 +28,10 @@ var gMeme = {
                 y: 450
             },
             color: '#fff',
+            shadowColor: '#000000',
             size: 40,
-            font: 'impact'
+            font: 'impact',
+            direction: 'center'
         }
     ]
 }
@@ -36,21 +42,91 @@ function getMeme() {
 }
 
 function setImg(imgId) {
+    _createMeme()
     gMeme.currImgId = imgId
+    gIdxLine = 2
+    clearInputs() // does not supposed to be here, will be taken care of
 }
 
-function setLineTxt(idx, txt) {
-    gMeme.lines[idx].text = txt
+function setLineTxt(lineIdx, txt) {
+    gMeme.lines[lineIdx].text = txt
 }
 
-function setTextColor(idx ,color) {
-    gMeme.lines[idx].color = color
+function setTextColor(lineIdx ,color) {
+    gMeme.lines[lineIdx].color = color
 }
 
-function lowerFontSize(gLineIdx) {
-    gMeme.lines[gLineIdx].size -= 5
+function setShadowoColor(lineIdx ,color) {
+    gMeme.lines[lineIdx].shadowColor = color
 }
 
-function raiseFontSize(gLineIdx) {
-    gMeme.lines[gLineIdx].size += 5
+function changeFontSize(lineIdx, sign) {
+    sign === '-' ? gMeme.lines[lineIdx].size -= 5 : gMeme.lines[lineIdx].size += 5
+}
+
+function _createMeme() {
+    return gMeme = {
+        currImgId: 1,
+        lines: [
+            {
+                idx: 0,
+                text: 'TOP',
+                pos: 
+                {
+                    x: 250,
+                    y: 50
+                },
+                color: '#fff',
+                shadowColor: '#000000',
+                size: 40,
+                font: 'impact',
+                direction: 'center'
+            },
+            {
+                idx: 1,
+                text: 'BOTTOM',
+                pos: 
+                {
+                    x: 250,
+                    y: 450
+                },
+                color: '#fff',
+                shadowColor: '#000000',
+                size: 40,
+                font: 'impact',
+                direction: 'center'
+            }
+        ]
+    }
+}
+
+function addNewLine() {
+    const canvas = getCanvas()
+    const newLine = 
+    {
+        idx: gIdxLine++,
+        text: 'NEW',
+        pos: 
+        {
+            x: canvas.width/2,
+            y: canvas.height/2
+        },
+        color: '#fff',
+        size: 40,
+        font: 'impact'
+    }
+
+    gMeme.lines.push(newLine)
+}
+
+function deleteLine(lineIdx) {
+    gMeme.lines.splice([lineIdx], 1)
+}
+
+function changeLineFont(lineIdx, font) {
+    gMeme.lines[lineIdx].font = font
+}
+
+function alignText(lineIdx, direction) {
+    gMeme.lines[lineIdx].direction = direction
 }

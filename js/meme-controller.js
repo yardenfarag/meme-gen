@@ -13,7 +13,18 @@ function onInit() {
     renderGallery()
 }
 
+function getCanvas() {
+    return gElCanvas
+}
+
+function renderMemeEditor() {
+    hideGallery()
+    const elEditor = document.querySelector('.editor')
+    elEditor.style.display = 'flex'
+}
+
 function renderMeme() {
+    renderMemeEditor()
     const meme = getMeme()
 
 	const img = new Image()
@@ -24,10 +35,12 @@ function renderMeme() {
         renderImg(img)
         meme.lines.forEach(line => {
             gCtx.lineWidth = 2
-            gCtx.strokeStyle = 'black'
+            gCtx.strokeStyle = line.shadowColor
             gCtx.fillStyle = line.color
+            gCtx.shadowColor = line.shadowColor
+            gCtx.shadowBlur = 2
             gCtx.font = line.size + 'px ' + line.font
-            gCtx.textAlign = 'center'
+            gCtx.textAlign = line.direction
             drawText(line.text, line.pos.x, line.pos.y)
 
         })
@@ -37,28 +50,44 @@ function renderMeme() {
 
 function renderImg(img) {
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-  }
+}
 
+function clearInputs() {
+    clearTextLine()
+    clearColorInputs()
+}
 
-  function onImgText(txt) {
+function clearTextLine() {
+    const elTextLine = document.querySelector('[name=text-line]')
+    elTextLine.value = ''
+}
+
+function clearColorInputs() {
+    const elFontColor = document.querySelector('[name=font-color]')
+    const elShadowColor = document.querySelector('[name=shadow-color]')
+    elFontColor.value = '#ffffff'
+    elShadowColor.value = '#000000'
+}
+
+function onImgText(txt) {
     setLineTxt(gLineIdx, txt)
     const meme = getMeme()
     drawText(txt, meme.lines[gLineIdx].pos.x,  meme.lines[gLineIdx].pos.y)
     renderMeme()
-  }
+}
 
-  function drawText(text, x, y) {
+function drawText(text, x, y) {
 
     
     gCtx.fillText(text, x, y) // Draws (fills) a given text at the given (x, y) position.
     gCtx.strokeText(text, x, y) // Draws (strokes) a given text at the given (x, y) position.
-  }
+}
 
-  function onAddTextLine() {
+function onAddTextLine() {
 
-  }
+}
 
-  function canvasClicked(ev) {
+function canvasClicked(ev) {
     const memeLines = getMeme().lines
 
     const elTextInput = document.querySelector('[name=text-line]')
@@ -74,24 +103,24 @@ function renderImg(img) {
         elTextInput.value = clickedLine.text
     }
     console.log(clickedLine)
-  }
+}
 
- function onChangeTextColor(color) {
+function onChangeTextColor(color) {
     setTextColor(gLineIdx ,color)
     renderMeme()
- }
+}
 
- function onLowerFontSize() {
-    lowerFontSize(gLineIdx)
+function onChangeShadowColor(color) {
+    setShadowoColor(gLineIdx ,color)
     renderMeme()
- }
+}
 
- function onRaiseFontSize() {
-    raiseFontSize(gLineIdx)
+function onChangeFontSize(sign) {
+    changeFontSize(gLineIdx, sign)
     renderMeme()
- }
+}
 
- function onSwitchTextLines() {
+function onSwitchTextLines() {
     const meme = getMeme()
     gLineIdx += 1
 
@@ -101,4 +130,24 @@ function renderImg(img) {
     const elTextInput = document.querySelector('[name=text-line]')
     elTextInput.value =  meme.lines[gLineIdx].text
 
- }
+}
+
+function onAddNewLine() {
+    addNewLine(gLineIdx)
+    renderMeme()
+}
+
+function onDeleteLine() {
+    deleteLine(gLineIdx)
+    renderMeme()
+}
+
+function onChangeLineFont(font) {
+    changeLineFont(gLineIdx, font)
+    renderMeme()
+}
+
+function onAlignText(direction) {
+    alignText(gLineIdx, direction)
+    renderMeme()
+}
