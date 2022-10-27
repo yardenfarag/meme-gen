@@ -182,3 +182,8 @@ function hideMemes() {
     const elSavedMemes = document.querySelector('.saved-memes')
     elSavedMemes.style.display = 'none'
 }
+
+function onSetFilterByTxt(txt) {
+    setFilterByTxt(txt)
+    renderGallery()
+}

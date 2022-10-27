@@ -150,3 +150,4 @@ function saveMeme(meme) {
     gSavedMemes.unshift(meme)
     saveToStorage(STORAGE_KEY, gSavedMemes)
 }
+

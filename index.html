@@ -105,13 +105,13 @@
                 <span>🍉</span>
             </div>
 
-            <button onclick="onSaveMeme()">Save</button>
+            <!-- <button onclick="onSaveMeme()">Save</button> -->
         </div>
     </main>
 
     <main class="main-content main-layout">
         <div class="flex">
-            <input class="search" type="text" placeholder="Search">
+            <input oninput="onSetFilterByTxt(this.value)" class="search" type="text" placeholder="Search">
             <button class="btn" onclick="onGetRandomMeme()">Random Meme</button>
         </div>
         <div class="images">

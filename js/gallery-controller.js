@@ -1,106 +1,115 @@
 'use strict'
 
-
+let gFilterBy = { txt: '' }
 let gImgs = [
     {
         id: 1, 
         url: 'img/1.jpg', 
-        keywords: ['funny', 'trump', 'politics']
+        keywords: 'funny trump politics'
     },
     {
         id: 2, 
         url: 'img/2.jpg', 
-        keywords: ['cute', 'dog']
+        keywords: 'cute dog'
     },
     {
         id: 3, 
         url: 'img/3.jpg', 
-        keywords: ['cute', 'sleep', 'dog']
+        keywords: 'cute sleep dog'
     },
     {
         id: 4, 
         url: 'img/4.jpg', 
-        keywords: ['cute', 'cat', 'sleep']
+        keywords: 'cute cat sleep'
     },
     {
         id: 5, 
         url: 'img/5.jpg', 
-        keywords: ['funny', 'success']
+        keywords: 'funny success'
     },
     {
         id: 6, 
         url: 'img/6.jpg', 
-        keywords: ['funny']
+        keywords: 'funny'
     },
     {
         id: 7, 
         url: 'img/7.jpg', 
-        keywords: ['funny', 'cute']
+        keywords: 'funny cute'
     }, {
         id: 8, 
         url: 'img/8.jpg', 
-        keywords: ['funny']
+        keywords: 'funny'
     },
     {
         id: 9, 
         url: 'img/9.jpg', 
-        keywords: ['funny', 'cute']
+        keywords: 'funny cute'
     },
     {
         id: 10, 
         url: 'img/10.jpg', 
-        keywords: ['funny', 'obama', 'politics']
+        keywords: 'funny obama politics'
     },
     {
         id: 11, 
         url: 'img/11.jpg', 
-        keywords: ['funny']
+        keywords: 'funny'
     },
     {
         id: 12, 
         url: 'img/12.jpg', 
-        keywords: ['funny']
+        keywords: 'funny'
     },
     {
         id: 13, 
         url: 'img/13.jpg', 
-        keywords: ['funny', 'success']
+        keywords: 'funny success'
     },
     {
         id: 14, 
         url: 'img/14.jpg', 
-        keywords: ['matrix']
+        keywords: 'matrix'
     },
     {
         id: 15, 
         url: 'img/15.jpg', 
-        keywords: ['funny']
+        keywords: 'funny'
     },
     {
         id: 16, 
         url: 'img/16.jpg', 
-        keywords: ['funny']
+        keywords: 'funny'
     },
     {
         id: 17, 
         url: 'img/17.jpg', 
-        keywords: ['funny', 'politics']
+        keywords: 'funny politics'
     },
     {
         id: 18, 
         url: 'img/18.jpg', 
-        keywords: ['funny', 'cute']
+        keywords: 'funny cute'
     }
 ]
+
+
+function getImgs() {
+    let imgs = gImgs.filter(img => img.keywords.split(' ').some( s => img.keywords.includes(gFilterBy.txt.toLowerCase())))
+    if (!gFilterBy.txt) imgs = gImgs
+    return imgs
+}
 
 function renderGallery() {
     hideEditor()
     hideMemes()
     showGallery()
 
+    const imgs = getImgs()
+
     const elImages = document.querySelector('.images')
 
-    const strHTMLs = gImgs.map(img => {
+    const strHTMLs = imgs.map(img => {
         return `<img src="img/${img.id}.jpg" alt="" onclick="onImgSelect(${img.id})">`
     }).join('')
 
@@ -133,4 +142,8 @@ function onToggleMenu() {
     const elMenuBtn = document.querySelector('.btn-menu')
     if (elMenuBtn.innerText === '☰') elMenuBtn.innerText = 'X'
     else elMenuBtn.innerText = '☰'
+}
+
+function setFilterByTxt(txt) {
+    gFilterBy.txt = txt
 }
