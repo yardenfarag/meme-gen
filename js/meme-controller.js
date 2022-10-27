@@ -19,6 +19,7 @@ function getCanvas() {
 
 function renderMemeEditor() {
     hideGallery()
+    hideMemes()
     const elEditor = document.querySelector('.editor')
     elEditor.style.display = 'flex'
 }
@@ -150,4 +151,34 @@ function onChangeLineFont(font) {
 function onAlignText(direction) {
     alignText(gLineIdx, direction)
     renderMeme()
+}
+
+function onGetRandomMeme() {
+    getRandomMeme() 
+    renderMeme()
+}
+
+function onSaveMeme() {
+    const meme = getMeme()
+    saveMeme(meme)
+}
+
+function displaySavedMemes() {
+    hideEditor()
+    hideGallery()
+    const savedMemes = getSavedMemes()
+
+    const elSavedMemes = document.querySelector('.saved-memes')
+    elSavedMemes.style.display = 'block'
+
+    const strHTMLs = savedMemes.map(meme => {
+        return `<img src="img/${meme.id}.jpg" alt="" onclick="">`
+    }).join('')
+
+    elSavedMemes.innerHTML = strHTMLs
+}
+
+function hideMemes() {
+    const elSavedMemes = document.querySelector('.saved-memes')
+    elSavedMemes.style.display = 'none'
 }

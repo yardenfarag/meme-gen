@@ -60,6 +60,23 @@ h3 {
     color: var(--clr7)
 }
 
+.btn {
+    width: 10%;
+    margin-inline-start:10px;
+    background-color: var(--clr6);
+    border:none;
+    border-radius: 2rem;
+    color: var(--clr1);
+    text-transform: uppercase;
+    font-family: roboto;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #fdbe70;
+}
+
 
 /* HELPERS */
 
@@ -147,6 +164,26 @@ header {
     gap: 70px
 }
 
+.btn-menu {
+    color: var(--clr5);
+    background-color: transparent;
+    border: none;
+    font-size: 1.7em;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    padding: 1px 7px;
+    padding-bottom: 5px;
+}
+
+.btn-menu:hover {
+    color: var(--clr6);
+}
+
+.mobile-menu-underscore {
+    display: none;
+}
+
 /* MAIN CONTENT */
 
 .main-content {
@@ -161,7 +198,7 @@ header {
 /* search */
 
 .search {
-    width: 100%;
+    width: 90%;
     height: 40px;
     border-radius: 2rem;
     border: 1px solid var(--clr5);
@@ -176,7 +213,7 @@ header {
 .images {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-template-columns: repeat(auto-fill, 170px);
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
     padding-block-start: 30px;
     justify-items: center;
     align-items: center;
@@ -188,6 +225,12 @@ header {
     cursor: pointer;
     width: 170px;
     height: 170px;
+}
+
+/* memes */
+
+.memes {
+    display: none;
 }
 
 /* canvas */
@@ -293,6 +336,64 @@ canvas {
     .editor .text-editor {
         align-self: center;
     }
+
+    .main-header {
+        position: relative;
+    }
+
+    .main-nav {
+        background-color: var(--clr6);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        transform: translateY(100%);
+        transform-origin: top;
+        max-height: 0;
+        box-shadow: none;
+        transition: max-height 0.6s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    body.menu-open .main-nav {
+        width: 100%;
+        color: var(--clr1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-height: 800px;
+    }
+    
+    .main-nav ul {
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap:0;
+    }
+
+    .main-nav li {
+        width: 100%;
+        padding-block-start: 70px;
+        padding-block-end: 70px;
+    }
+    
+    .main-nav a {
+        width: 100%;
+        color: var(--clr1);
+    }
+
+    .main-nav a:hover {
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+
+    .mobile-menu-underscore {
+        display: block;
+    }
 }
 
 /* RESPONSIVNESS */
@@ -312,10 +413,26 @@ canvas {
 
     .editor .editor-header {
         width: 100%;
+        flex-direction: row;
+        align-items: center; 
     }
     
     .editor .editor-header h3 {
         align-self: flex-start;
+    }
+
+    .editor .editon-mav {
+        align-self: flex-end;
+        color: var(--clr4);
+        padding: 10px;
+        border: 1px solid var(--clr3);
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        background-color: var(--clr1);
+    }
+
+    .btn-menu {
+        display: none;
     }
 
 }

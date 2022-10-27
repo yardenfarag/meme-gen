@@ -95,6 +95,7 @@ let gImgs = [
 
 function renderGallery() {
     hideEditor()
+    hideMemes()
     showGallery()
 
     const elImages = document.querySelector('.images')
@@ -125,4 +126,11 @@ function onImgSelect(imgId) {
     
     setImg(imgId)
     renderMeme()
+}
+
+function onToggleMenu() {
+    document.body.classList.toggle('menu-open')
+    const elMenuBtn = document.querySelector('.btn-menu')
+    if (elMenuBtn.innerText === '☰') elMenuBtn.innerText = 'X'
+    else elMenuBtn.innerText = '☰'
 }

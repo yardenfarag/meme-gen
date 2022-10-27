@@ -1,12 +1,19 @@
 'use strict'
 
+const STORAGE_KEY = 'savedMemesDB'
 
 let gIdxLine = 2
 let gMeme
+let gSavedMemes = []
 
 
 function getMeme() {
     return gMeme
+}
+
+function getSavedMemes() {
+    const savedMemes = loadFromStorage(STORAGE_KEY)
+    return savedMemes
 }
 
 function setImg(imgId) {
@@ -99,4 +106,47 @@ function changeLineFont(lineIdx, font) {
 
 function alignText(lineIdx, direction) {
     gMeme.lines[lineIdx].direction = direction
+}
+
+function getRandomMeme() {
+    const canvas = getCanvas()
+
+    return gMeme = {
+        currImgId: getRandomIntInclusive(1, 18),
+        lines: [
+            {
+                idx: 0,
+                text: getRandomSentence(),
+                pos: 
+                {
+                    x: canvas.width/2,
+                    y: canvas.height + 50 - canvas.height
+                },
+                color: getRandomColor(),
+                shadowColor: getRandomColor(),
+                size: 40,
+                font: 'impact',
+                direction: 'center'
+            },
+            {
+                idx: 1,
+                text: getRandomSentence(),
+                pos: 
+                {
+                    x: canvas.width/2,
+                    y: canvas.height - 25
+                },
+                color: getRandomColor(),
+                shadowColor: getRandomColor(),
+                size: 40,
+                font: 'impact',
+                direction: 'center'
+            }
+        ]
+    }
+}
+
+function saveMeme(meme) {
+    gSavedMemes.unshift(meme)
+    saveToStorage(STORAGE_KEY, gSavedMemes)
 }

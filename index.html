@@ -14,22 +14,31 @@
             <div class="logo"><img src="img/logo.png" alt=""></div>
             <nav class="main-nav">
                 <ul class="menu clean-list">
-                    <li><a onclick="onActive(this)" href="#">Memes</a></li>
+                    <li><a onclick="displaySavedMemes()" href="#">Memes</a></li>
+                    <span class="mobile-menu-underscore">_</span>
                     <li><a onclick="renderGallery()" href="#">Gallery</a></li>
-                    <li><a onclick="onActive(this)" href="#">About</a></li>
+                    <span class="mobile-menu-underscore">_</span>
+                    <li><a href="#">About</a></li>
                 </ul>
             </nav>
+            <button class="btn-menu" onclick="onToggleMenu()">☰</button>
+
         </div>
     </header>
 
+    <main class="memes main-layout">
+        <div class="saved-memes">
+
+        </div>
+    </main>
     
     <main class="editor main-layout flex justify-center">
         <div class="canvas-container flex direction-col">
             <a onclick="renderGallery()" href="#">← Back to Gallery</a>
             <canvas 
             id="my-canvas" 
-            height="400" 
-            width="400" 
+            height="450" 
+            width="450" 
             onclick="canvasClicked(event)"
             ></canvas>
         </div>
@@ -96,17 +105,22 @@
                 <span>🍉</span>
             </div>
 
+            <button onclick="onSaveMeme()">Save</button>
         </div>
     </main>
 
     <main class="main-content main-layout">
-        <input class="search" type="text" placeholder="Search">
+        <div class="flex">
+            <input class="search" type="text" placeholder="Search">
+            <button class="btn" onclick="onGetRandomMeme()">Random Meme</button>
+        </div>
         <div class="images">
 
         </div>
     </main>
 
-
+    <script src="js/service/storage-service.js"></script>
+    <script src="js/service/util-service.js"></script>
     <script src="js/service/meme-service.js"></script>
     <script src="js/gallery-controller.js"></script>
     <script src="js/meme-controller.js"></script>
