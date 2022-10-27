@@ -327,6 +327,20 @@ canvas {
     background-color: var(--clr1);
 }
 
+.editor .btn {
+    width: 100%;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.editor .btn:hover {
+    color: var(--clr1);
+}
+
+.share-container {
+    text-align: center;
+}
+
 /* FOR MOBILE */
 
 @media (max-width: 820px) {

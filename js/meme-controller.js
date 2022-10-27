@@ -59,6 +59,7 @@ function renderImg(img) {
 function clearInputs() {
     clearTextLine()
     clearColorInputs()
+    clearShareBtn()
 }
 
 function clearTextLine() {
@@ -71,6 +72,11 @@ function clearColorInputs() {
     const elShadowColor = document.querySelector('[name=shadow-color]')
     elFontColor.value = '#ffffff'
     elShadowColor.value = '#000000'
+}
+
+function clearShareBtn() {
+    const shareBtn = document.querySelector('.share-container')
+    shareBtn.innerHTML = ``
 }
 
 function onImgText(txt) {
@@ -230,14 +236,11 @@ function onMouseDown(ev) {
 }
 
 function onMouseMove(ev) {
-    if (gSelectedLine !== null) {
-        gSelectedLine.pos.x = ev.offsetX - gSelectedLine.offset.x
-        gSelectedLine.pos.y = ev.offsetY - gSelectedLine.offset.y
-    }
-
     const meme = getMeme()
-    meme.lines[gLineIdx].pos.x = gSelectedLine.pos.x
-    meme.lines[gLineIdx].pos.y = gSelectedLine.pos.y
+    if (gSelectedLine !== null) {
+        meme.lines[gLineIdx].pos.x = gSelectedLine.pos.x = ev.offsetX - gSelectedLine.offset.x
+        meme.lines[gLineIdx].pos.y = gSelectedLine.pos.y = ev.offsetY - gSelectedLine.offset.y
+    }
 
     renderMeme()
 }
@@ -254,7 +257,27 @@ function getSelectedLine(ev) {
         ev.offsetX < line.pos.x + gCtx.measureText(line.text).width/2 &&
         ev.offsetY > line.pos.y - LINE_HEIGHT && ev.offsetY < line.pos.y + LINE_HEIGHT 
     })
-
+    gLineIdx = clickedLine.idx
     if (clickedLine) return clickedLine
     else return null
 }
+
+function downloadCanvas(elLink) {
+    const data = gElCanvas.toDataURL('image/jpg')
+    elLink.href = data
+    elLink.download = 'my-meme'
+}
+
+function upLoadImg() {
+const imgDataUrl = gElCanvas.toDataURL("image/jpeg")
+
+  function onSuccess(uploadedImgUrl) {
+    const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+    document.querySelector('.share-container').innerHTML = `
+        <a class="btn" href="https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
+           Share to facebook  
+        </a>`
+  }
+  doUploadImg(imgDataUrl, onSuccess)
+}
+
