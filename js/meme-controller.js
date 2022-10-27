@@ -1,16 +1,19 @@
 'use strict'
 
-const LINE_WIDTH = 50
-const LINE_HEIGHT = 25
+const LINE_HEIGHT = 30
+const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
 let gElCanvas
 let gCtx
 let gLineIdx = 0
+let gSelectedLine = null
+
 
 function onInit() {
     gElCanvas = document.getElementById('my-canvas')
     gCtx = gElCanvas.getContext('2d')
     renderGallery()
+    addEventListeners()
 }
 
 function getCanvas() {
@@ -103,7 +106,7 @@ function canvasClicked(ev) {
     if (clickedLine) {
         elTextInput.value = clickedLine.text
     }
-    console.log(clickedLine)
+
 }
 
 function onChangeTextColor(color) {
@@ -186,4 +189,72 @@ function hideMemes() {
 function onSetFilterByTxt(txt) {
     setFilterByTxt(txt)
     renderGallery()
+}
+
+function getEvPos(ev) {
+
+    let pos = {
+      x: ev.offsetX,
+      y: ev.offsetY
+    }
+
+    if (TOUCH_EVS.includes(ev.type)) {
+
+      ev.preventDefault()
+
+      ev = ev.changedTouches[0]
+
+      pos = {
+        x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+        y: ev.pageY - ev.target.offsetTop - ev.target.clientTop
+      }
+    }
+    return pos
+}
+
+function addEventListeners() {
+    gElCanvas.addEventListener("mousedown", onMouseDown)
+    gElCanvas.addEventListener("mousemove", onMouseMove)
+    gElCanvas.addEventListener("mouseup", onMouseUp)
+}
+
+function onMouseDown(ev) {
+    ev.preventDefault()
+    gSelectedLine = getSelectedLine(ev)
+    if (gSelectedLine !== null) {
+        gSelectedLine.offset = {
+            x: ev.offsetX - gSelectedLine.pos.x,
+            y: ev.offsetY - gSelectedLine.pos.y
+        }
+    }
+}
+
+function onMouseMove(ev) {
+    if (gSelectedLine !== null) {
+        gSelectedLine.pos.x = ev.offsetX - gSelectedLine.offset.x
+        gSelectedLine.pos.y = ev.offsetY - gSelectedLine.offset.y
+    }
+
+    const meme = getMeme()
+    meme.lines[gLineIdx].pos.x = gSelectedLine.pos.x
+    meme.lines[gLineIdx].pos.y = gSelectedLine.pos.y
+
+    renderMeme()
+}
+
+function onMouseUp(ev) {
+    gSelectedLine = null
+}
+
+function getSelectedLine(ev) {
+    const memeLines = getMeme().lines
+
+    const clickedLine = memeLines.find(line => {
+      return ev.offsetX > line.pos.x - gCtx.measureText(line.text).width/2 && 
+        ev.offsetX < line.pos.x + gCtx.measureText(line.text).width/2 &&
+        ev.offsetY > line.pos.y - LINE_HEIGHT && ev.offsetY < line.pos.y + LINE_HEIGHT 
+    })
+
+    if (clickedLine) return clickedLine
+    else return null
 }

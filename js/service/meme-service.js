@@ -47,6 +47,7 @@ function _createMeme() {
         lines: [
             {
                 idx: 0,
+                isDrag: false,
                 text: 'TOP',
                 pos: 
                 {
@@ -61,6 +62,7 @@ function _createMeme() {
             },
             {
                 idx: 1,
+                isDrag: false,
                 text: 'BOTTOM',
                 pos: 
                 {
@@ -116,6 +118,7 @@ function getRandomMeme() {
         lines: [
             {
                 idx: 0,
+                isDrag: false,
                 text: getRandomSentence(),
                 pos: 
                 {
@@ -130,6 +133,7 @@ function getRandomMeme() {
             },
             {
                 idx: 1,
+                isDrag: false,
                 text: getRandomSentence(),
                 pos: 
                 {
