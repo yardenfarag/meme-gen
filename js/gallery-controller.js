@@ -90,6 +90,41 @@ let gImgs = [
         id: 18, 
         url: 'img/18.jpg', 
         keywords: 'funny cute'
+    },
+    {
+        id: 19, 
+        url: 'img/19.jpg', 
+        keywords: 'funny oprah'
+    },
+    {
+        id: 20, 
+        url: 'img/20.jpg', 
+        keywords: 'funny field'
+    },
+    {
+        id: 21, 
+        url: 'img/21.jpg', 
+        keywords: 'funny africa'
+    },
+    {
+        id: 22, 
+        url: 'img/22.jpg', 
+        keywords: 'funny'
+    },
+    {
+        id: 23, 
+        url: 'img/23.jpg', 
+        keywords: 'trump politics'
+    },
+    {
+        id: 24, 
+        url: 'img/24.jpg', 
+        keywords: 'jersey pauly funny'
+    },
+    {
+        id: 25, 
+        url: 'img/25.jpg', 
+        keywords: 'funny cute dog'
     }
 ]
 

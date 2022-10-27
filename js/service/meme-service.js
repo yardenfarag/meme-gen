@@ -67,7 +67,7 @@ function _createMeme() {
                 pos: 
                 {
                     x: canvas.width/2,
-                    y: canvas.height - 25
+                    y: null
                 },
                 color: '#fff',
                 shadowColor: '#000000',

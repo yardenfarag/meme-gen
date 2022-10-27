@@ -33,11 +33,14 @@ function renderMeme() {
 
 	const img = new Image()
 
+    
+
 	img.src = `img/${meme.currImgId}.jpg`
 
 	img.onload = () => {
         renderImg(img)
         meme.lines.forEach(line => {
+            if (line.pos.y === null) line.pos.y = gElCanvas.height - 40
             gCtx.lineWidth = 2
             gCtx.strokeStyle = line.shadowColor
             gCtx.fillStyle = line.color
@@ -49,10 +52,11 @@ function renderMeme() {
 
         })
     }
-
+    
 }
 
 function renderImg(img) {
+    gElCanvas.height = (img.height * gElCanvas.width) / img.width
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
 }
 
