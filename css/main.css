@@ -229,6 +229,32 @@ header {
     height: auto;
 }
 
+/* keywords */
+
+.keywords {
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.keywords {
+    padding-block-start: 20px;
+    cursor: pointer;
+}
+
+.keywords .funny, .cat {
+    font-size: 1.5rem;
+
+}
+
+.keywords .trump, .obama{
+    font-size: 1.3rem;
+}
+
+.keywords .dog, .oprah {
+    font-size: 1.1rem;
+}
+
 /* memes */
 
 .memes {
@@ -322,6 +348,7 @@ canvas {
 }
 
 .editor .stickers {
+    cursor: pointer;
     width: 350px;
     font-size: 2.4rem;
     border: 1px solid var(--clr3);
@@ -351,7 +378,6 @@ canvas {
     }
     .editor .text-editor {
         align-self: center;
-        height: auto;
     }
 
     .main-header {

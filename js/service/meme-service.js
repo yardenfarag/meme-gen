@@ -175,3 +175,22 @@ function doUploadImg(imgDataUrl, onSuccess) {
     XHR.send(formData)
 }
 
+function addStickerLine(sticker) {
+    const canvas = getCanvas()
+    const newLine = 
+    {
+        idx: gIdxLine++,
+        text: sticker,
+        pos: 
+        {
+            x: canvas.width/2,
+            y: canvas.height/2
+        },
+        color: '#fff',
+        size: 40,
+        font: 'impact'
+    }
+
+    gMeme.lines.push(newLine)
+}
+

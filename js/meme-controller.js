@@ -201,6 +201,20 @@ function onSetFilterByTxt(txt) {
     renderGallery()
 }
 
+function onFilterBy(filter) {
+    filterBy(filter.innerText)
+    renderGallery()
+    raiseFontSize(filter.innerText)
+}
+
+function raiseFontSize(keyword) {
+    const elKeyword = document.querySelector(`a.${keyword}`)
+    let style = window.getComputedStyle(elKeyword, null).getPropertyValue('font-size')
+    let fontSize = parseFloat(style)
+    console.log(fontSize)
+    elKeyword.style.fontSize = (fontSize + 3) + 'px'
+}
+
 function getEvPos(ev) {
 
     let pos = {
@@ -283,5 +297,11 @@ const imgDataUrl = gElCanvas.toDataURL("image/jpeg")
         </a>`
   }
   doUploadImg(imgDataUrl, onSuccess)
+}
+
+function onAddStickerLine(sticker) {
+    const stickerText = sticker.innerText
+    addStickerLine(stickerText)
+    renderMeme()
 }
 

@@ -1,6 +1,6 @@
 'use strict'
 
-let gFilterBy = { txt: '' }
+let gFilterBy = { txt: '', filterWord: '' }
 let gImgs = [
     {
         id: 1, 
@@ -104,7 +104,7 @@ let gImgs = [
     {
         id: 21, 
         url: 'img/21.jpg', 
-        keywords: 'funny africa'
+        keywords: 'funny'
     },
     {
         id: 22, 
@@ -119,7 +119,7 @@ let gImgs = [
     {
         id: 24, 
         url: 'img/24.jpg', 
-        keywords: 'jersey pauly funny'
+        keywords: 'funny'
     },
     {
         id: 25, 
@@ -130,15 +130,21 @@ let gImgs = [
 
 
 function getImgs() {
-    let imgs = gImgs.filter(img => img.keywords.split(' ').some( s => img.keywords.includes(gFilterBy.txt.toLowerCase())))
-    if (!gFilterBy.txt) imgs = gImgs
-    return imgs
+    let imgs = gImgs.filter(img => img.keywords.split(' ').some( keyword => img.keywords.includes(gFilterBy.txt.toLowerCase())))
+    
+    let filteredImgs = gImgs.filter(img => img.keywords.split(' ').some( keyword => img.keywords.includes(gFilterBy.filterWord.toLowerCase())))
+
+
+    if (!gFilterBy.txt) return filteredImgs
+    else return imgs
+    
 }
 
 function renderGallery() {
     hideEditor()
     hideMemes()
     showGallery()
+    renderKeywords()
 
     const imgs = getImgs()
 
@@ -181,4 +187,28 @@ function onToggleMenu() {
 
 function setFilterByTxt(txt) {
     gFilterBy.txt = txt
+}
+
+function filterBy(keyword) {
+    if (keyword === 'all') keyword = ''
+    gFilterBy.filterWord = keyword
+}
+
+function getKeywords() {
+    let keywords = []
+    gImgs.forEach(img => {
+        keywords.push(img.keywords.split(' '))
+    })
+    return [...new Set(keywords.flat())]
+}
+
+function renderKeywords() {
+    const keywords = getKeywords()
+
+    const elKeywords = document.querySelector('.keywords')
+
+    let strHTML = keywords.map(keyword => `<a class="${keyword}" onclick="onFilterBy(this)">${keyword}</a>`).join('')
+
+    elKeywords.innerHTML = `<a class="all" onclick="onFilterBy(this)">all</a>` + strHTML
+
 }
