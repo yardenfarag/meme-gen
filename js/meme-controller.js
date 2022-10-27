@@ -211,7 +211,6 @@ function raiseFontSize(keyword) {
     const elKeyword = document.querySelector(`a.${keyword}`)
     let style = window.getComputedStyle(elKeyword, null).getPropertyValue('font-size')
     let fontSize = parseFloat(style)
-    console.log(fontSize)
     elKeyword.style.fontSize = (fontSize + 3) + 'px'
 }
 
@@ -303,5 +302,24 @@ function onAddStickerLine(sticker) {
     const stickerText = sticker.innerText
     addStickerLine(stickerText)
     renderMeme()
+}
+
+// themes
+
+initThemeSelector()
+
+function initThemeSelector(){
+    const themeSelector = document.querySelector('.theme')
+    const themeCss = document.querySelector('.theme-css')
+    const currTheme = loadFromStorage('theme') || 'default'
+    
+    
+    themeSelector.addEventListener("change", () => {
+        themeCss.setAttribute('href', `css/themes/${themeSelector.value}.css`)
+        saveToStorage('theme', themeSelector.value)
+    })
+
+    themeSelector.value = currTheme
+    themeCss.setAttribute('href', `css/themes/${currTheme}.css`)
 }
 

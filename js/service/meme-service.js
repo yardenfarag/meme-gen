@@ -194,3 +194,7 @@ function addStickerLine(sticker) {
     gMeme.lines.push(newLine)
 }
 
+
+
+
+

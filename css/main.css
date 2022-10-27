@@ -1,18 +1,4 @@
-:root {
 
-    /* greys */
-
-    --clr1: #ffffff; /* bg color */
-    --clr2: #f8f8f8; /* editor bg color */
-    --clr3: #e8e8e8; /* editor icons color */
-    --clr4: #c5c5c5; /* editor text color */
-    --clr5: #b1b2b2; /* nav bar text color */
-    --clr7: #727272; /* h3 color */
-
-    /* oranges */
-
-    --clr6: #fe9a20; /* buttons color and hover nav bar color */
-}
 
 * {
     box-sizing: border-box;
@@ -184,6 +170,11 @@ header {
     display: none;
 }
 
+.i18 .theme {
+    background-color: transparent;
+    cursor: pointer;
+}
+
 /* MAIN CONTENT */
 
 .main-content {
@@ -233,12 +224,15 @@ header {
 
 .keywords {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    flex-wrap: wrap;
 
 }
 
-.keywords {
+.keywords a {
     padding-block-start: 20px;
+    padding-inline-start: 6px;
+    padding-inline-end: 6px;
     cursor: pointer;
 }
 

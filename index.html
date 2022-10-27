@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" class="theme-css" style href="css/themes/default.css">
     <link rel="stylesheet" href="css/main.css">
     <title>Meme Generator</title>
 </head>
@@ -25,6 +26,13 @@
 
         </div>
     </header>
+
+    <section class="i18 main-layout">
+        <select name="" id="" class="theme">
+            <option value="default">Default</option>
+            <option value="dark">Darky</option>
+        </select>
+    </section>
 
     <main class="memes main-layout">
         <div class="saved-memes">
@@ -63,6 +71,8 @@
                     <select name="fonts" id="" onchange="onChangeLineFont(this.value)">
                         <option value="Impact">Impact</option>
                         <option value="Arial">Arial</option>
+                        <option value="Calibri">Calibri</option>
+                        <option value="Tahoma">Tahoma</option>
                     </select>
                     <button name="-" class="editor-btn" onclick="onChangeFontSize(this.name)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M5.12 14L7.5 7.67L9.87 14M6.5 5L1 19h2.25l1.12-3h6.25l1.13 3H14L8.5 5h-2M18 17l5-5.07l-1.41-1.43L19 13.1V7h-2v6.1l-2.59-2.6L13 11.93L18 17Z"/></svg>

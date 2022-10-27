@@ -1,0 +1,15 @@
+:root {
+
+    /* greys */
+
+    --clr1: #444242; /* bg color */
+    --clr2: #3f3e3e; /* editor bg color */
+    --clr3: #ffffff; /* editor icons color */
+    --clr4: #000000; /* editor text color */
+    --clr5: #ffffff; /* nav bar text color */
+    --clr7: #ffffff; /* h3 color */
+
+    /* oranges */
+
+    --clr6: #fe9a20; /* buttons color and hover nav bar color */
+}
