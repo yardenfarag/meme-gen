@@ -121,10 +121,9 @@ function renderSavedMemes() {
 
     const savedMemes = getSavedMemes()
     const elMemes = document.querySelector('.saved-memes')
-    console.log(savedMemes)
 
     const strHTMLs = savedMemes.map(meme => {
-        return `<img src="img/${meme.currImgId}.jpg" alt="" onclick="onSavedMemeSelect(${meme.id})">`
+        return `<img src="img/${meme.currImgId}.jpg" alt="" onclick="onSavedMemeSelect('${meme.id}')">`
     }).join('')
 
     elMemes.innerHTML = strHTMLs
@@ -138,10 +137,10 @@ function renderImg(img) {
 
 function onSavedMemeSelect(memeId) {
     const savedMemes = getSavedMemes()
-    const selectedMeme = savedMemes.filter(meme => {meme.id = memeId})
-    console.log(selectedMeme)
-    setImg(meme.currImgId)
+    const selectedMeme = savedMemes.find(meme => meme.id === memeId)
+    setImg(selectedMeme.currImgId)
     renderSavedMeme(selectedMeme)
+    setMeme(selectedMeme)
 }
 
 function clearInputs() {
@@ -379,8 +378,6 @@ function getSelectedLine(ev) {
         ev.offsetX < line.pos.x + gCtx.measureText(line.text).width/2 &&
         ev.offsetY > line.pos.y - LINE_HEIGHT && ev.offsetY < line.pos.y + LINE_HEIGHT
     })
-    
-    console.log(clickedLine.idx);
     gLineIdx = clickedLine.idx
     if (clickedLine) return clickedLine
     else return null

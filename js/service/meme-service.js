@@ -16,6 +16,10 @@ function getSavedMemes() {
     
 }
 
+function setMeme(selectedMeme) {
+    gMeme = selectedMeme
+}
+
 function setImg(imgId) {
     _createMeme()
     gMeme.currImgId = imgId
