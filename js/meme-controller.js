@@ -1,14 +1,11 @@
 'use strict'
 
 const LINE_HEIGHT = 30
-const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
 let gElCanvas
 let gCtx
 let gLineIdx = 0
 let gSelectedLine = null
-
-
 
 function onInit() {
     gElCanvas = document.getElementById('my-canvas')
@@ -276,27 +273,6 @@ function raiseFontSize(keyword) {
     elKeyword.style.fontSize = (fontSize + 3) + 'px'
 }
 
-function getEvPos(ev) {
-
-    let pos = {
-      x: ev.offsetX,
-      y: ev.offsetY
-    }
-
-    if (TOUCH_EVS.includes(ev.type)) {
-
-      ev.preventDefault()
-
-      ev = ev.changedTouches[0]
-
-      pos = {
-        x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
-        y: ev.pageY - ev.target.offsetTop - ev.target.clientTop
-      }
-    }
-    return pos
-}
-
 function addEventListeners() {
     gElCanvas.addEventListener("mousedown", onMouseDown)
     gElCanvas.addEventListener("mousemove", onMouseMove)
@@ -307,7 +283,6 @@ function addEventListeners() {
 }
 
 function onMouseDown(ev) {
-    // ev.preventDefault()
     gSelectedLine = getSelectedLine(ev)
     if (gSelectedLine !== null) {
             gSelectedLine.offset = {
