@@ -344,6 +344,7 @@ function onTouchStart(ev) {
 function onTouchMove(ev) {
     ev.preventDefault()
     const meme = getMeme()
+
     if (gSelectedLine !== null) {
         meme.lines[gLineIdx].pos.x = gSelectedLine.pos.x = ev.touches[0].clientX - gSelectedLine.offset.x
         meme.lines[gLineIdx].pos.y = gSelectedLine.pos.y = ev.touches[0].clientY - gSelectedLine.offset.y
@@ -360,12 +361,14 @@ function onTouchEnd() {
 function getTouchedLine(ev) {
     const memeLines = getMeme().lines
 
+    let bounding = gElCanvas.getBoundingClientRect()
+
     const clickedLine = memeLines.find(line => {
-        return ev.touches[0].clientX - 200 > line.pos.x - gCtx.measureText(line.text).width/2 && 
-        ev.touches[0].clientX - 200 < line.pos.x + gCtx.measureText(line.text).width/2 &&
-        ev.touches[0].clientY - 160 > line.pos.y - LINE_HEIGHT && ev.touches[0].clientY - 160 < line.pos.y + LINE_HEIGHT
+        return ev.touches[0].clientX - bounding.left > line.pos.x - gCtx.measureText(line.text).width/2 && 
+        ev.touches[0].clientX - bounding.left < line.pos.x + gCtx.measureText(line.text).width/2 &&
+        ev.touches[0].clientY - bounding.top > line.pos.y - LINE_HEIGHT && ev.touches[0].clientY - bounding.top < line.pos.y + LINE_HEIGHT
     })
-    console.log(clickedLine.idx);
+
     gLineIdx = clickedLine.idx
     if (clickedLine) return clickedLine
     else return null
