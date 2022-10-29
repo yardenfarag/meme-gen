@@ -18,8 +18,12 @@ const gTrans = {
         he: 'ברירת מחדל'
     },
     'dark': {
-        eh: 'Darky',
+        en: 'Darky',
         he: 'חשוכי'
+    },
+    'sunny': {
+        en: 'Sunny',
+        he: 'חמים'
     },
     'search': {
         en: 'Search',
