@@ -239,13 +239,12 @@ header {
     padding-block-start: 30px;
     justify-items: center;
     align-items: center;
-    gap: 10px;
+    gap: 30px;
 }
 
 .saved-memes img {
     border-radius: 10px;
     cursor: pointer;
-    width: 170px;
     height: auto;
 }
 

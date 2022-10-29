@@ -62,7 +62,7 @@ function showMemeEditor() {
 
 function showSavedMemes() {
     const elSavedMemes = document.querySelector('.saved-memes')
-    elSavedMemes.style.display = 'block'
+    elSavedMemes.style.display = 'grid'
 }
 
 function renderRandomMeme() {
