@@ -2,21 +2,21 @@
 
 function getRandomSentence() {
     const sentences = [
-        'You rotate the ground',
-        'You understand trees',
+        'Me',
         'Look, a distraction',
-        'Never at home on Sundays',
         'You\'re welcome',
         'Sure. It\'s 5:10PM',
         'Wrong',
         'For 50 years',
         'For 2 years',
         'Right',
-        'I know what you are',
+        'After the Sprint',
         'What if I told you',
         'Shame',
         'So tell me more',
-        'So you\'re tellling me'
+        'So you\'re tellling me',
+        'You',
+        'When you see it',
     ]
 
     return sentences[getRandomIntInclusive(0, sentences.length-1)]
@@ -35,5 +35,14 @@ function getRandomColor() {
         color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
+}
+
+function makeId(length = 4) {
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    var txt = ''
+    for (var i = 0; i < length; i++) {
+        txt += possible.charAt(Math.floor(Math.random() * possible.length))
+    }
+    return txt
 }
   

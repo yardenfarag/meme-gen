@@ -2,10 +2,10 @@
 
     /* greys */
 
-    --clr1: #444242; /* bg color */
-    --clr2: #3f3e3e; /* editor bg color */
-    --clr3: #ffffff; /* editor icons color */
-    --clr4: #000000; /* editor text color */
+    --clr1: #222222; /* bg color */
+    --clr2: #222222; /* editor bg color */
+    --clr3: gray; /* editor icons color */
+    --clr4: #ffffff; /* editor text color */
     --clr5: #ffffff; /* nav bar text color */
     --clr7: #ffffff; /* h3 color */
 

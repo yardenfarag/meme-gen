@@ -12,8 +12,8 @@ function getMeme() {
 }
 
 function getSavedMemes() {
-    const savedMemes = loadFromStorage(STORAGE_KEY)
-    return savedMemes
+    return loadFromStorage(STORAGE_KEY)
+    
 }
 
 function setImg(imgId) {
@@ -138,7 +138,7 @@ function getRandomMeme() {
                 pos: 
                 {
                     x: canvas.width/2,
-                    y: canvas.height - 25
+                    y: canvas.height - 50
                 },
                 color: getRandomColor(),
                 shadowColor: getRandomColor(),
@@ -151,7 +151,8 @@ function getRandomMeme() {
 }
 
 function saveMeme(meme) {
-    gSavedMemes.unshift(meme)
+    meme.id = makeId()
+    gSavedMemes.push(meme)
     saveToStorage(STORAGE_KEY, gSavedMemes)
 }
 

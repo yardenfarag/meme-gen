@@ -9,9 +9,11 @@ let gLineIdx = 0
 let gSelectedLine = null
 
 
+
 function onInit() {
     gElCanvas = document.getElementById('my-canvas')
     gCtx = gElCanvas.getContext('2d')
+    doTrans()
     renderGallery()
     addEventListeners()
 }
@@ -20,20 +22,11 @@ function getCanvas() {
     return gElCanvas
 }
 
-function renderMemeEditor() {
-    hideGallery()
-    hideMemes()
-    const elEditor = document.querySelector('.editor')
-    elEditor.style.display = 'flex'
-}
-
 function renderMeme() {
-    renderMemeEditor()
+    showMemeEditor()
     const meme = getMeme()
 
 	const img = new Image()
-
-    
 
 	img.src = `img/${meme.currImgId}.jpg`
 
@@ -55,9 +48,95 @@ function renderMeme() {
     
 }
 
+function showMemeEditor() {
+    hideGallery()
+    hideMemes()
+    const elEditor = document.querySelector('.editor')
+    elEditor.style.display = 'flex'
+}
+
+function showSavedMemes() {
+    const elSavedMemes = document.querySelector('.saved-memes')
+    elSavedMemes.style.display = 'block'
+}
+
+function renderRandomMeme() {
+    showMemeEditor()
+    const meme = getMeme()
+	const img = new Image()
+	img.src = `img/${meme.currImgId}.jpg`
+
+	img.onload = () => {
+        renderImg(img)
+        meme.lines.forEach(line => {
+            if (line.pos.y === null) line.pos.y = gElCanvas.height - 40
+            line.text = getRandomSentence()
+            line.color = getRandomColor()
+            line.shadowColor = getRandomColor()
+            gCtx.lineWidth = 2
+            gCtx.fillStyle = line.color
+            gCtx.shadowColor = line.shadowColor
+            gCtx.strokeStyle = line.shadowColor
+            gCtx.shadowBlur = 2
+            gCtx.font = line.size + 'px ' + line.font
+            gCtx.textAlign = line.direction
+            drawText(line.text, line.pos.x, line.pos.y)
+
+        })
+    }
+    
+}
+
+function renderSavedMeme(meme) {
+    showMemeEditor()
+	const img = new Image()
+	img.src = `img/${meme.currImgId}.jpg`
+
+	img.onload = () => {
+        renderImg(img)
+        meme.lines.forEach(line => {
+            if (line.pos.y === null) line.pos.y = gElCanvas.height - 40
+            gCtx.lineWidth = 2
+            gCtx.strokeStyle = line.shadowColor
+            gCtx.fillStyle = line.color
+            gCtx.shadowColor = line.shadowColor
+            gCtx.shadowBlur = 2
+            gCtx.font = line.size + 'px ' + line.font
+            gCtx.textAlign = line.direction
+            drawText(line.text, line.pos.x, line.pos.y)
+
+        })
+    }
+}
+
+function renderSavedMemes() {
+    hideEditor()
+    hideGallery()
+    showSavedMemes()
+
+    const savedMemes = getSavedMemes()
+    const elMemes = document.querySelector('.saved-memes')
+    console.log(savedMemes)
+
+    const strHTMLs = savedMemes.map(meme => {
+        return `<img src="img/${meme.currImgId}.jpg" alt="" onclick="onSavedMemeSelect(${meme.id})">`
+    }).join('')
+
+    elMemes.innerHTML = strHTMLs
+
+}
+
 function renderImg(img) {
     gElCanvas.height = (img.height * gElCanvas.width) / img.width
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+}
+
+function onSavedMemeSelect(memeId) {
+    const savedMemes = getSavedMemes()
+    const selectedMeme = savedMemes.filter(meme => {meme.id = memeId})
+    console.log(selectedMeme)
+    setImg(meme.currImgId)
+    renderSavedMeme(selectedMeme)
 }
 
 function clearInputs() {
@@ -176,21 +255,6 @@ function onSaveMeme() {
     saveMeme(meme)
 }
 
-function displaySavedMemes() {
-    hideEditor()
-    hideGallery()
-    const savedMemes = getSavedMemes()
-
-    const elSavedMemes = document.querySelector('.saved-memes')
-    elSavedMemes.style.display = 'block'
-
-    const strHTMLs = savedMemes.map(meme => {
-        return `<img src="img/${meme.id}.jpg" alt="" onclick="">`
-    }).join('')
-
-    elSavedMemes.innerHTML = strHTMLs
-}
-
 function hideMemes() {
     const elSavedMemes = document.querySelector('.saved-memes')
     elSavedMemes.style.display = 'none'
@@ -291,17 +355,26 @@ const imgDataUrl = gElCanvas.toDataURL("image/jpeg")
   function onSuccess(uploadedImgUrl) {
     const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
     document.querySelector('.share-container').innerHTML = `
-        <a class="btn" href="https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
+        <a data-trans="share" class="btn" href="https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
            Share to facebook  
         </a>`
   }
   doUploadImg(imgDataUrl, onSuccess)
+  doTrans()
 }
 
 function onAddStickerLine(sticker) {
     const stickerText = sticker.innerText
     addStickerLine(stickerText)
     renderMeme()
+}
+
+function onSetLang(lang) {
+    setLang(lang)
+    if (lang === 'he') document.body.classList.add('hebrew')
+    else document.body.classList.remove('hebrew')
+    renderGallery()
+    doTrans()
 }
 
 // themes

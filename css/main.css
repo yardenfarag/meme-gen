@@ -14,7 +14,7 @@
 /* BASICS */
 
 html {
-    font-family: roboto;
+    font-family: roboto, sans-serif;
 }
 
 body {
@@ -54,7 +54,7 @@ h3 {
     border-radius: 2rem;
     color: var(--clr1);
     text-transform: uppercase;
-    font-family: roboto;
+    font-family: roboto, sans-serif;
     font-size: 1.1rem;
     cursor: pointer;
 }
@@ -113,7 +113,11 @@ h3 {
 /* LAYOUT */
 
 .main-layout {
-    margin:0
+    margin:auto;
+}
+
+.hebrew {
+    direction: rtl;
 }
 
 /* COMPONENTS */
@@ -170,9 +174,10 @@ header {
     display: none;
 }
 
-.i18 .theme {
+.i18 .theme, .langs {
     background-color: transparent;
     cursor: pointer;
+    color: var(--clr7)
 }
 
 /* MAIN CONTENT */
@@ -220,6 +225,25 @@ header {
     height: auto;
 }
 
+/* saved memes */
+
+.saved-memes {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    padding-block-start: 30px;
+    justify-items: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.saved-memes img {
+    border-radius: 10px;
+    cursor: pointer;
+    width: 170px;
+    height: auto;
+}
+
 /* keywords */
 
 .keywords {
@@ -260,7 +284,6 @@ header {
 .canvas-container {
     height: auto;
     background-color: transparent;
-    gap: 40px;
     border-inline-end: 1px solid var(--clr3)
 }
 
@@ -276,8 +299,6 @@ canvas {
 
 .editor {
     display: none;
-    height: 90vh;
-    gap: 20px;
     border: 1px solid var(--clr3);
     overflow: hidden;
 }
@@ -310,6 +331,11 @@ canvas {
 .editor select {
     color: var(--clr4);
     border: 1px solid var(--clr4);
+    cursor: pointer;
+}
+
+.editor select:hover {
+    color: var(--clr6);
 }
 
 .editor .tools {
@@ -325,7 +351,6 @@ canvas {
     align-self: flex-start;
     justify-self:start;
     padding: 10px;
-    padding-block-start: 40px;
 }
 
 .editor-btn {
@@ -366,7 +391,7 @@ canvas {
 
 /* FOR MOBILE */
 
-@media (max-width: 820px) {
+@media (max-width: 1110px) {
     .editor {
         flex-direction: column;
     }
@@ -439,14 +464,14 @@ canvas {
 
 /* RESPONSIVNESS */
 
-@media (min-width: 820px) {
+@media (min-width: 1100px) {
     .main-layout {
-        margin-inline-start: 10px;
-        margin-inline-end: 10px;
+        margin: auto;
+        width: 1000px;
      }
      .canvas-container {
         width: 100%;
-        gap: 40px;
+        padding-block-end: 20px;
     }
     .editor a{
         padding-block-end: 50px;
@@ -460,6 +485,8 @@ canvas {
     
     .editor .editor-header h3 {
         align-self: flex-start;
+        padding-inline-start: 10px;
+
     }
     
     .editor .text-editor {
@@ -482,10 +509,11 @@ canvas {
 
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1500px) {
     .main-layout {
-       margin-inline-start: 50px;
-       margin-inline-end: 50px;
+        width: 1440px;
+       /* margin-inline-start: 50px;
+       margin-inline-end: 50px; */
     }
 
 }

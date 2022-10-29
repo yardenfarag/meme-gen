@@ -172,10 +172,14 @@ function hideEditor() {
     elEditor.style.display = 'none'
 }
 
-function onImgSelect(imgId) {
-    
+function onImgSelect(imgId) {  
     setImg(imgId)
     renderMeme()
+}
+
+function onRandom(imgId) {
+    setImg(imgId)
+    renderRandomMeme()
 }
 
 function onToggleMenu() {

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/8552429723.js" crossorigin="anonymous"></script>    
     <link rel="stylesheet" class="theme-css" style href="css/themes/default.css">
     <link rel="stylesheet" href="css/main.css">
     <title>Meme Generator</title>
@@ -15,11 +16,11 @@
             <div class="logo"><img src="img/logo.png" alt=""></div>
             <nav class="main-nav">
                 <ul class="menu clean-list">
-                    <li><a onclick="displaySavedMemes()" href="#">Memes</a></li>
+                    <li><a data-trans="memes" onclick="renderSavedMemes()" href="#">Memes</a></li>
                     <span class="mobile-menu-underscore">_</span>
-                    <li><a onclick="renderGallery()" href="#">Gallery</a></li>
+                    <li><a data-trans="gallery" onclick="renderGallery()" href="#">Gallery</a></li>
                     <span class="mobile-menu-underscore">_</span>
-                    <li><a href="#">About</a></li>
+                    <li><a data-trans="about" onclick="renderGallery()" href="#">About</a></li>
                 </ul>
             </nav>
             <button class="btn-menu" onclick="onToggleMenu()">☰</button>
@@ -28,9 +29,15 @@
     </header>
 
     <section class="i18 main-layout">
+
+        <select class="langs" onchange="onSetLang(this.value)">
+            <option value="en">English</option>
+            <option value="he">עברית</option>
+        </select>
+
         <select name="" id="" class="theme">
-            <option value="default">Default</option>
-            <option value="dark">Darky</option>
+            <option data-trans="default" value="default">Default</option>
+            <option data-trans="dark" value="dark">Darky</option>
         </select>
     </section>
 
@@ -42,7 +49,7 @@
     
     <main class="editor main-layout flex justify-center">
         <div class="canvas-container flex direction-col">
-            <a onclick="renderGallery()" href="#">← Back to Gallery</a>
+            <a data-trans="back-to-gallery" onclick="renderGallery()" href="#">← Back to Gallery</a>
             <canvas 
             id="my-canvas" 
             height="450" 
@@ -52,15 +59,15 @@
         </div>
         <div class="text-editor flex align-center direction-col">
             <div class="editor-header flex space-between">
-                <h3>Edit Text Lines</h3>
+                <h3 data-trans="edit-text-lines">Edit Text Lines</h3>
                 <nav class="editor-nav">
                     <ul class="flex clean-list">
                         <li><button class="editor-btn" onclick="onSwitchTextLines()">⇵</button></li>
                         <li><button class="editor-btn" onclick="onAddNewLine()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="currentColor" d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8Z"/><path fill="currentColor" d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8Z"/></svg>
+                            <i class="fa-solid fa-plus"></i>
                         </button></li>
                         <li><button class="editor-btn" onclick="onDeleteLine()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="currentColor"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></g></svg>
+                            <i class="fa-solid fa-trash-can"></i>
                         </button></li>
                     </ul>
                 </nav>
@@ -75,22 +82,23 @@
                         <option value="Tahoma">Tahoma</option>
                     </select>
                     <button name="-" class="editor-btn" onclick="onChangeFontSize(this.name)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M5.12 14L7.5 7.67L9.87 14M6.5 5L1 19h2.25l1.12-3h6.25l1.13 3H14L8.5 5h-2M18 17l5-5.07l-1.41-1.43L19 13.1V7h-2v6.1l-2.59-2.6L13 11.93L18 17Z"/></svg>
+                        🗛
                     </button>
                     <button name="+" class="editor-btn" onclick="onChangeFontSize(this.name)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M5.12 14L7.5 7.67L9.87 14M6.5 5L1 19h2.25l1.12-3h6.25l1.13 3H14L8.5 5h-2M18 7l-5 5.07l1.41 1.43L17 10.9V17h2v-6.1l2.59 2.6L23 12.07L18 7Z"/></svg>
+                        🗚
                     </button>
                     |
                     <button name="right" class="editor-btn" onclick="onAlignText(this.name)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="currentColor" d="M120 230h496c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm0 424h496c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm784 140H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0-424H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8z"/></svg>
+                        <i class="fa-solid fa-align-left"></i>
                     </button>
                     <button name="center" class="editor-btn" onclick="onAlignText(this.name)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="currentColor" d="M264 230h496c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H264c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm496 424c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H264c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496zm144 140H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0-424H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8z"/></svg>
+                        <i class="fa-solid fa-align-center"></i>
                     </button>
                     <button name="left" class="editor-btn" onclick="onAlignText(this.name)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="currentColor" d="M904 158H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 424H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 212H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0-424H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8z"/></svg>
+                        <i class="fa-solid fa-align-right"></i>
                     </button>
                     |
+                    
                         <input type="color" value="#ffffff" name="font-color" oninput="onChangeTextColor(this.value)">
 
                         <input type="color" value="#000000" name="shadow-color" oninput="onChangeShadowColor(this.value)">
@@ -121,17 +129,17 @@
                 <span onclick="onAddStickerLine(this)">☀️</span>
             </div>
 
-            <!-- <button onclick="onSaveMeme()">Save</button> -->
-            <a href="#" class="btn" onclick="downloadCanvas(this)" download="my-meme.jpg">Download</a>
-                <a href="#" class="btn" onclick="upLoadImg()">Upload</a>
+            <button data-trans="save" class="btn" onclick="onSaveMeme()">Save</button>
+            <a data-trans="download" href="#" class="btn" onclick="downloadCanvas(this)" download="my-meme.jpg">Download</a>
+            <a data-trans="upload" href="#" class="btn" onclick="upLoadImg()">Upload</a>
                 <div class="btn share-container"></div>
         </div>
     </main>
 
     <main class="main-content main-layout">
         <div class="flex">
-            <input oninput="onSetFilterByTxt(this.value)" class="search" type="text" placeholder="Search">
-            <button class="btn random" onclick="onGetRandomMeme()">Random Meme</button>
+            <input data-trans="search" oninput="onSetFilterByTxt(this.value)" class="search" type="text" placeholder="Search">
+            <button data-trans="random-meme" class="btn random" onclick="onRandom(getRandomIntInclusive(1,25))">Random Meme</button>
         </div>
         <div class="keywords"></div>
         <div class="images">
@@ -139,6 +147,7 @@
         </div>
     </main>
 
+    <script src="js/service/i18-service.js"></script>
     <script src="js/service/storage-service.js"></script>
     <script src="js/service/util-service.js"></script>
     <script src="js/service/meme-service.js"></script>
