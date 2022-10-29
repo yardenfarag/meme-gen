@@ -47,7 +47,6 @@ function _createMeme() {
         lines: [
             {
                 idx: 0,
-                isDrag: false,
                 text: 'TOP',
                 pos: 
                 {
@@ -62,7 +61,6 @@ function _createMeme() {
             },
             {
                 idx: 1,
-                isDrag: false,
                 text: 'BOTTOM',
                 pos: 
                 {
@@ -108,46 +106,6 @@ function changeLineFont(lineIdx, font) {
 
 function alignText(lineIdx, direction) {
     gMeme.lines[lineIdx].direction = direction
-}
-
-function getRandomMeme() {
-    const canvas = getCanvas()
-
-    return gMeme = {
-        currImgId: getRandomIntInclusive(1, 18),
-        lines: [
-            {
-                idx: 0,
-                isDrag: false,
-                text: getRandomSentence(),
-                pos: 
-                {
-                    x: canvas.width/2,
-                    y: canvas.height + 50 - canvas.height
-                },
-                color: getRandomColor(),
-                shadowColor: getRandomColor(),
-                size: 40,
-                font: 'impact',
-                direction: 'center'
-            },
-            {
-                idx: 1,
-                isDrag: false,
-                text: getRandomSentence(),
-                pos: 
-                {
-                    x: canvas.width/2,
-                    y: canvas.height - 50
-                },
-                color: getRandomColor(),
-                shadowColor: getRandomColor(),
-                size: 40,
-                font: 'impact',
-                direction: 'center'
-            }
-        ]
-    }
 }
 
 function saveMeme(meme) {

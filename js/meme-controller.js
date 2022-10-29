@@ -29,7 +29,7 @@ function renderMeme() {
 
 	const img = new Image()
 
-    if (meme.currImgId.length > 5) {
+    if (meme.currImgId.length > 3) {
         img.src = meme.currImgId
     }
 
@@ -174,15 +174,9 @@ function onImgText(txt) {
     renderMeme()
 }
 
-function drawText(text, x, y) {
-
-    
-    gCtx.fillText(text, x, y) // Draws (fills) a given text at the given (x, y) position.
-    gCtx.strokeText(text, x, y) // Draws (strokes) a given text at the given (x, y) position.
-}
-
-function onAddTextLine() {
-
+function drawText(text, x, y) { 
+    gCtx.fillText(text, x, y) 
+    gCtx.strokeText(text, x, y)
 }
 
 function canvasClicked(ev) {
@@ -413,15 +407,13 @@ const imgDataUrl = gElCanvas.toDataURL("image/jpeg")
 }
 
 function onAddStickerLine(sticker) {
-    const stickerText = sticker.innerText
-    addStickerLine(stickerText)
+    addStickerLine(sticker.innerText)
     renderMeme()
 }
 
 function onSetLang(lang) {
     setLang(lang)
-    if (lang === 'he') document.body.classList.add('hebrew')
-    else document.body.classList.remove('hebrew')
+    lang === 'he' ? document.body.classList.add('hebrew') : document.body.classList.remove('hebrew')
     renderGallery()
     doTrans()
 }

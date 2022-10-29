@@ -33,6 +33,10 @@ const gTrans = {
         en: 'Random Meme',
         he: 'הגרל מימ'
     },
+    'upload-your-own': {
+        en: 'upload your own',
+        he: 'העלה תמונה ממכשירך'
+    },
     'back-to-gallery': {
         en: '←Back to Gallery',
         he: '→חזור לגלריה'
