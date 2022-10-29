@@ -20,7 +20,7 @@ function setImg(imgId) {
     _createMeme()
     gMeme.currImgId = imgId
     gIdxLine = 2
-    clearInputs() // does not supposed to be here, will be taken care of
+    clearInputs()
 }
 
 function setLineTxt(lineIdx, txt) {

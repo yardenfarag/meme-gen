@@ -42,7 +42,7 @@
         </select>
     </section>
 
-    <main class="memes main-layout">
+    <main class="memes main-layout flex justify-center">
         <div class="saved-memes">
 
         </div>
@@ -141,6 +141,12 @@
         <div class="flex">
             <input data-trans="search" oninput="onSetFilterByTxt(this.value)" class="search" type="text" placeholder="Search">
             <button data-trans="random-meme" class="btn random" onclick="onRandom(getRandomIntInclusive(1,25))">Random Meme</button>
+            <button class="btn upload">
+                <label for="user-upload">
+                    Upload Your Own
+                    <input style="display: none;" id="user-upload" type="file" name="user-image" onchange="onImgInput(event)">
+                </label>
+            </button>
         </div>
         <div class="keywords"></div>
         <div class="images">

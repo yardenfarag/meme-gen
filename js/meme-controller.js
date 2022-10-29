@@ -18,6 +18,7 @@ function onInit() {
     addEventListeners()
 }
 
+
 function getCanvas() {
     return gElCanvas
 }
@@ -28,7 +29,11 @@ function renderMeme() {
 
 	const img = new Image()
 
-	img.src = `img/${meme.currImgId}.jpg`
+    if (meme.currImgId.length > 5) {
+        img.src = meme.currImgId
+    }
+
+    else img.src = `img/${meme.currImgId}.jpg`
 
 	img.onload = () => {
         renderImg(img)
@@ -303,16 +308,18 @@ function addEventListeners() {
     gElCanvas.addEventListener("mousedown", onMouseDown)
     gElCanvas.addEventListener("mousemove", onMouseMove)
     gElCanvas.addEventListener("mouseup", onMouseUp)
+    gElCanvas.addEventListener("touchstart", onTouchStart)
+    gElCanvas.addEventListener("touchmove", onTouchMove)
+    gElCanvas.addEventListener("touchend", onTouchEnd)
 }
 
 function onMouseDown(ev) {
-    ev.preventDefault()
+    // ev.preventDefault()
     gSelectedLine = getSelectedLine(ev)
     if (gSelectedLine !== null) {
-        gSelectedLine.offset = {
+            gSelectedLine.offset = {
             x: ev.offsetX - gSelectedLine.pos.x,
-            y: ev.offsetY - gSelectedLine.pos.y
-        }
+            y: ev.offsetY - gSelectedLine.pos.y}
     }
 }
 
@@ -326,18 +333,60 @@ function onMouseMove(ev) {
     renderMeme()
 }
 
-function onMouseUp(ev) {
+function onMouseUp() {
     gSelectedLine = null
+}
+
+function onTouchStart(ev) {
+    ev.preventDefault()
+    gSelectedLine = getTouchedLine(ev)
+    if (gSelectedLine !== null) {
+        gSelectedLine.offset = {
+            x: ev.touches[0].clientX - gSelectedLine.pos.x,
+            y: ev.touches[0].clientY - gSelectedLine.pos.y
+        }
+    }
+}
+
+function onTouchMove(ev) {
+    ev.preventDefault()
+    const meme = getMeme()
+    if (gSelectedLine !== null) {
+        meme.lines[gLineIdx].pos.x = gSelectedLine.pos.x = ev.touches[0].clientX - gSelectedLine.offset.x
+        meme.lines[gLineIdx].pos.y = gSelectedLine.pos.y = ev.touches[0].clientY - gSelectedLine.offset.y
+    }
+
+    renderMeme()
+    
+}
+
+function onTouchEnd() {
+    gSelectedLine = null
+}
+
+function getTouchedLine(ev) {
+    const memeLines = getMeme().lines
+
+    const clickedLine = memeLines.find(line => {
+        return ev.touches[0].clientX - 200 > line.pos.x - gCtx.measureText(line.text).width/2 && 
+        ev.touches[0].clientX - 200 < line.pos.x + gCtx.measureText(line.text).width/2 &&
+        ev.touches[0].clientY - 160 > line.pos.y - LINE_HEIGHT && ev.touches[0].clientY - 160 < line.pos.y + LINE_HEIGHT
+    })
+    console.log(clickedLine.idx);
+    gLineIdx = clickedLine.idx
+    if (clickedLine) return clickedLine
+    else return null
 }
 
 function getSelectedLine(ev) {
     const memeLines = getMeme().lines
-
     const clickedLine = memeLines.find(line => {
-      return ev.offsetX > line.pos.x - gCtx.measureText(line.text).width/2 && 
+        return ev.offsetX > line.pos.x - gCtx.measureText(line.text).width/2 && 
         ev.offsetX < line.pos.x + gCtx.measureText(line.text).width/2 &&
-        ev.offsetY > line.pos.y - LINE_HEIGHT && ev.offsetY < line.pos.y + LINE_HEIGHT 
+        ev.offsetY > line.pos.y - LINE_HEIGHT && ev.offsetY < line.pos.y + LINE_HEIGHT
     })
+    
+    console.log(clickedLine.idx);
     gLineIdx = clickedLine.idx
     if (clickedLine) return clickedLine
     else return null
@@ -376,6 +425,22 @@ function onSetLang(lang) {
     renderGallery()
     doTrans()
 }
+
+function onImgInput(ev) {
+    loadImageFromInput(ev, renderMeme)
+}
+
+function loadImageFromInput(ev, onImageReady) {
+    const reader = new FileReader()
+    reader.onload = function (event) {
+      let img = new Image()
+      img.src = event.target.result 
+      setImg(event.target.result)
+      img.onload = onImageReady.bind(null, img)
+    }
+    reader.readAsDataURL(ev.target.files[0])
+}
+
 
 // themes
 

@@ -177,7 +177,8 @@ header {
 .i18 .theme, .langs {
     background-color: transparent;
     cursor: pointer;
-    color: var(--clr7)
+    color: var(--clr7);
+    border: 1px solid var(--clr3);
 }
 
 /* MAIN CONTENT */
@@ -194,7 +195,7 @@ header {
 /* search */
 
 .search {
-    width: 90%;
+    width: 50%;
     height: 40px;
     border-radius: 2rem;
     border: 1px solid var(--clr5);
@@ -202,6 +203,10 @@ header {
     padding-inline-start: 20px;
     font-size: 1rem ;
     font-style: italic;
+}
+
+.upload label {
+    cursor: pointer;
 }
 
 
@@ -271,12 +276,6 @@ header {
 
 .keywords .dog, .oprah {
     font-size: 1.1rem;
-}
-
-/* memes */
-
-.memes {
-    display: none;
 }
 
 /* canvas */
@@ -457,8 +456,8 @@ canvas {
         display: block;
     }
 
-    .random {
-        font-size: .9rem;
+    .random, .upload {
+        font-size: .8rem;
     }
 }
 
