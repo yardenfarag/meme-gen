@@ -326,6 +326,7 @@ function onTouchStart(ev) {
             y: ev.touches[0].clientY - gSelectedLine.pos.y
         }
     }
+    focusOnLine(gSelectedLine)
 }
 
 function onTouchMove(ev) {
@@ -343,6 +344,7 @@ function onTouchMove(ev) {
 
 function onTouchEnd() {
     gSelectedLine = null
+    renderMeme()
 }
 
 function getTouchedLine(ev) {
