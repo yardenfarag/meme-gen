@@ -144,7 +144,6 @@ function renderGallery() {
     hideEditor()
     hideMemes()
     showGallery()
-    renderKeywords()
 
     const imgs = getImgs()
 
@@ -207,12 +206,13 @@ function getKeywords() {
 }
 
 function renderKeywords() {
+    
     const keywords = getKeywords()
 
     const elKeywords = document.querySelector('.keywords')
 
-    let strHTML = keywords.map(keyword => `<a class="${keyword}" onclick="onFilterBy(this)">${keyword}</a>`).join('')
+    let strHTML = keywords.map(keyword => `<span style="font-size: ${getKeywordVal(keyword)}px" class="${keyword}" onclick="onFilterBy(this)">${keyword}</span>`).join('')
 
-    elKeywords.innerHTML = `<a class="all" onclick="onFilterBy(this)">all</a>` + strHTML
+    elKeywords.innerHTML = `<span class="all" onclick="onFilterBy(this)">all</span>` + strHTML
 
 }

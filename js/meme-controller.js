@@ -12,9 +12,10 @@ function onInit() {
     gCtx = gElCanvas.getContext('2d')
     doTrans()
     renderGallery()
+    determineKeywordPopularity()
+    renderKeywords()
     addEventListeners()
 }
-
 
 function getCanvas() {
     return gElCanvas
@@ -154,6 +155,10 @@ function clearTextLine() {
 function clearColorInputs() {
     const elFontColor = document.querySelector('[name=font-color]')
     const elShadowColor = document.querySelector('[name=shadow-color]')
+    const elFontPicker = document.querySelector('.font-picker')
+    elFontPicker.style.color = '#c5c5c5'
+    const elShadowPicker = document.querySelector('.shadow-picker')
+    elShadowPicker.style.color = '#c5c5c5'
     elFontColor.value = '#ffffff'
     elShadowColor.value = '#000000'
 }
@@ -190,16 +195,21 @@ function canvasClicked(ev) {
     if (clickedLine) {
         elTextInput.value = clickedLine.text
     }
+    focusOnLine(clickedLine)
 
 }
 
 function onChangeTextColor(color) {
     setTextColor(gLineIdx ,color)
+    const elFontPicker = document.querySelector('.font-picker')
+    elFontPicker.style.color = color
     renderMeme()
 }
 
 function onChangeShadowColor(color) {
     setShadowoColor(gLineIdx ,color)
+    const elShadowPicker = document.querySelector('.shadow-picker')
+    elShadowPicker.style.color = color
     renderMeme()
 }
 
@@ -261,16 +271,16 @@ function onSetFilterByTxt(txt) {
 }
 
 function onFilterBy(filter) {
+    updateSearch(filter.innerText)
     filterBy(filter.innerText)
     renderGallery()
-    raiseFontSize(filter.innerText)
+    increaseKeywordPopularity(filter.innerText)
+    renderKeywords()
 }
 
-function raiseFontSize(keyword) {
-    const elKeyword = document.querySelector(`a.${keyword}`)
-    let style = window.getComputedStyle(elKeyword, null).getPropertyValue('font-size')
-    let fontSize = parseFloat(style)
-    elKeyword.style.fontSize = (fontSize + 3) + 'px'
+function updateSearch(txt) {
+    const elSearchBar = document.querySelector('.search')
+    elSearchBar.value = txt
 }
 
 function addEventListeners() {
@@ -289,6 +299,7 @@ function onMouseDown(ev) {
             x: ev.offsetX - gSelectedLine.pos.x,
             y: ev.offsetY - gSelectedLine.pos.y}
     }
+    focusOnLine(gSelectedLine)
 }
 
 function onMouseMove(ev) {
@@ -298,6 +309,7 @@ function onMouseMove(ev) {
         meme.lines[gLineIdx].pos.y = gSelectedLine.pos.y = ev.offsetY - gSelectedLine.offset.y
     }
 
+    focusOnLine(gSelectedLine)
     renderMeme()
 }
 
@@ -359,6 +371,17 @@ function getSelectedLine(ev) {
     gLineIdx = clickedLine.idx
     if (clickedLine) return clickedLine
     else return null
+}
+
+function focusOnLine(line) {
+    if (!line) return
+    const x = line.pos.x - (gCtx.measureText(line.text).width/2) - 1
+    const y = line.pos.y - line.size +1
+    const width = gCtx.measureText(line.text).width
+    const height = line.size + 5
+    gCtx.rect(x, y, width, height)
+    gCtx.strokeStyle = '#FFFF00'
+    gCtx.stroke()
 }
 
 function downloadCanvas(elLink) {

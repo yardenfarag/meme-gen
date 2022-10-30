@@ -5,7 +5,7 @@ const STORAGE_KEY = 'savedMemesDB'
 let gIdxLine = 2
 let gMeme
 let gSavedMemes = []
-
+let gKeywordsSearchCountMap
 
 function getMeme() {
     return gMeme
@@ -155,6 +155,21 @@ function addStickerLine(sticker) {
     }
 
     gMeme.lines.push(newLine)
+}
+
+function determineKeywordPopularity() {
+    gKeywordsSearchCountMap = getKeywords().reduce((prevVal, currVal) =>
+        {prevVal[currVal] = getRandomIntInclusive(13, 22)
+        return prevVal
+    }, {})
+}
+
+function getKeywordVal(word) {
+    return gKeywordsSearchCountMap[word]
+}
+
+function increaseKeywordPopularity(word) {
+    gKeywordsSearchCountMap[word]++
 }
 
 

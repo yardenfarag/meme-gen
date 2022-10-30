@@ -257,24 +257,12 @@ header {
 
 }
 
-.keywords a {
+.keywords span {
     padding-block-start: 20px;
     padding-inline-start: 6px;
     padding-inline-end: 6px;
     cursor: pointer;
-}
-
-.keywords .funny, .cat {
-    font-size: 1.5rem;
-
-}
-
-.keywords .trump, .obama{
-    font-size: 1.3rem;
-}
-
-.keywords .dog, .oprah {
-    font-size: 1.1rem;
+    color: var(--clr5);
 }
 
 /* canvas */
@@ -385,6 +373,11 @@ canvas {
 
 .share-container {
     text-align: center;
+}
+
+.editor .font-color-picker, .shadow-color-picker {
+    position: absolute;
+    opacity:0;
 }
 
 /* FOR MOBILE */
