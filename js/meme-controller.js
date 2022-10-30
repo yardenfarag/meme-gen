@@ -47,6 +47,7 @@ function renderMeme() {
             drawText(line.text, line.pos.x, line.pos.y)
 
         })
+        focusOnLine(gSelectedLine)
     }
     
 }
@@ -309,7 +310,6 @@ function onMouseMove(ev) {
         meme.lines[gLineIdx].pos.y = gSelectedLine.pos.y = ev.offsetY - gSelectedLine.offset.y
     }
 
-    focusOnLine(gSelectedLine)
     renderMeme()
 }
 
@@ -375,10 +375,11 @@ function getSelectedLine(ev) {
 
 function focusOnLine(line) {
     if (!line) return
-    const x = line.pos.x - (gCtx.measureText(line.text).width/2) - 1
+    const x = line.pos.x - 5 - (gCtx.measureText(line.text).width/2)
     const y = line.pos.y - line.size +1
-    const width = gCtx.measureText(line.text).width
+    const width = gCtx.measureText(line.text).width + 10
     const height = line.size + 5
+    gCtx.setLineDash([10])
     gCtx.rect(x, y, width, height)
     gCtx.strokeStyle = '#FFFF00'
     gCtx.stroke()
